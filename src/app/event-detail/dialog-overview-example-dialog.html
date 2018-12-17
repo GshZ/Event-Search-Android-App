@@ -1,0 +1,17 @@
+<h1 mat-dialog-title class="row">View Seat Map
+<button mat-button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNoClick()">
+  <span aria-hidden="true">&times;</span>
+</button>
+</h1>
+<div mat-dialog-content>
+  <!-- <mat-form-field> -->
+    <a target="_blank" [href]="data.url">
+      <img [src]="data.url" class="img-fluid height: auto" alt="No Seat Map found">
+    </a>
+  <!-- </mat-form-field> -->
+</div>
+<div mat-dialog-actions class="float-right">
+  <br><br>
+  <button mat-button (click)="onNoClick()" class="btn btn-outline-primary float-right">Close</button>
+  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>

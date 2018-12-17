@@ -1,0 +1,39 @@
+<br><br>
+<div *ngIf="passEventsInfo!==[]">
+<div *ngIf="detailTableHidden" [@slideInOutEvent]>
+  <button *ngIf="data.length>0 && detailTableHidden && passEventsInfo && passEventsInfo!=[] && passEventsInfo[0]!='No result'" type="button" class="btn btn-outline-secondary float-right" (click)="goToDetail()" [disabled]="disableDetailButton">Details ></button>
+  <app-favorites (submitDetail)="getTMDetailJSONObj($event)"></app-favorites>
+</div>
+
+<div *ngIf='!detailTableHidden' [@slideInOutDetail]>
+    <h3 class="eventName">{{eventName}}</h3><br>
+  <button type="button" class="btn btn-outline-secondary" (click)="goToLists()">< List</button>
+  <button class="btn btn-outline-light float-right">
+    <!-- <a href="#" (click)="callTwiterApi()"> -->
+    <a class="twitter-share-button" target="_blank"
+        [href]="tweetHerf"
+        data-size="large">
+        <img src="http://csci571.com/hw/hw8/Images/Twitter.png" style="width:20px; height:20px">
+    </a>
+    <!-- </a> -->
+  </button>
+  <button type="button" class="btn btn-outline-secondary float-right">
+    <i class="material-icons black" *ngIf="!check(TMDetailJSONObj['id'])"  (click)="favorite()">
+      star_border
+    </i>
+    <i class="material-icons" id = "yellowStar" *ngIf="check(TMDetailJSONObj['id'])" (click)="favoriteDelete(this.TMDetailJSONObj['id'])">
+      star
+    </i>
+  </button>
+  <mat-tab-group class="nav nav-pills justify-content-center" mat-align-tabs="center" dynamicHeight = "true">
+      <mat-tab class="nav-item" label="Event">
+        <div class="container"><app-event-detail [detailObj]="TMDetailJSONObj"></app-event-detail></div>
+      </mat-tab>
+      <mat-tab class="nav-item" label="Artist/Team">
+        <app-artist-or-team [detailObj]="TMDetailJSONObj"></app-artist-or-team></mat-tab>
+      <mat-tab class="nav-item" label="Venue"><app-venue-table [detailObj]="TMDetailJSONObj"></app-venue-table> </mat-tab>
+      <mat-tab class="nav-item" label="UpcomingEvent"><app-upcoming-event [detailObj]="TMDetailJSONObj"></app-upcoming-event> </mat-tab>
+    </mat-tab-group>
+
+</div>
+</div>

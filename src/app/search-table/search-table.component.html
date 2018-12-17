@@ -1,0 +1,107 @@
+<h1 class="row justify-content-center align-items center">Entertainment Event Ticket Search</h1>
+<div class="container border" style="width:800px;">
+<form #searchForm="ngForm">
+  <br>
+  <div class="form-group row">
+    <label for="searchKeyword" class="col col-sm-2 col-form-label">Email address</label>
+    <div class="col-sm-8" style="padding:0px">
+      <input type="text" class="col-sm-10 form-control" id="searchKeyword"
+      placeholder="Enter Artist, Team or Event Name (eg. Laker)"
+      required
+      matInput [matAutocomplete]="auto"
+      (keydown)="onKeydown($event)"
+      [(ngModel)]="searchInfo.keyword" name="searchKeyword"
+      #searchKeyword="ngModel">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of options" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete><br>
+    <!-- </div>-->
+    <!-- <div class="col"> -->
+        <!-- <label for="error" class="col col-sm-2 col-form-label"></label> -->
+      <!-- <div class="invalid-feedback">Please enter a keyword</div> -->
+      <div id="error" class="row" class="error-message" *ngIf="searchKeyword.invalid && (searchKeyword.dirty || searchKeyword.touched)">
+        <br>Please enter a keyword
+      </div>
+    <!-- </div> -->
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="searchCategory" class="col-sm-2 col-form-label">Category</label>
+    <select name="searchCategory" id="searchCategory" class="col-sm-2 form-control"
+    [(ngModel)]="searchInfo.category" name="searchCategory">
+
+        <!-- <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option> -->
+
+      <option value="" selected>All</option>
+      <option value="KZFzniwnSyZfZ7v7nJ">Music</option>
+      <option value="KZFzniwnSyZfZ7v7nE">Sports</option>
+      <option value="KZFzniwnSyZfZ7v7na">Arts & Theatre</option>
+      <option value="KZFzniwnSyZfZ7v7nn">Film</option>
+      <option value="KZFzniwnSyZfZ7v7n1">Miscellaneous</option>
+    </select>
+  </div>
+  <div class="form-group row">
+    <label for="searchDistance" class="col-sm-2 col-form-label">Distance</label>
+    <div class="col" id="searchDistance" style="padding:0px">
+      <input type="text" class="col-sm-2 form-control" id="searchDistanceValue" placeholder="10"
+      [(ngModel)]="searchInfo.distanceValue" name="searchDistanceValue"
+      #searchDistanceValue="ngModel">
+      <!-- <div *ngIf="searchDistanceValue != /?\d^/ && (searchDistanceValue.dirty || searchDistanceValue.touched)"
+      class="alert alert-danger">
+      Please enter a valid number
+      </div> TODO: 全数字输入要求-->
+      <div class="col-sm-2">
+        <select id="searchDistanceUnit" class="col-sm-30 form-control"
+        [(ngModel)]="searchInfo.distanceUnit" name="searchInfo.distanceUnit">
+          <option value="miles">miles</option>
+          <option value="kilometers">kilometers</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <fieldset class="form-group">
+      <div class="row">
+        <label class="col-sm-2 col-form-label">From</label>
+        <div class="col-sm-10">
+          <div class="row form-check" style="padding:0px">
+            <input class="col form-check-input" type="radio" name="searchFromRadios" id="searchFromHere" value="option1" checked (click)="onClickCurrentLoc()">
+            <label class="col form-check-label" for="searchFromHere">
+              Current location
+            </label>
+          </div>
+          <div class="row form-check" style="padding:0px">
+            <input class="col form-check-input" type="radio" name="searchFromRadios" id="searchFromInput" value="option2"
+            (click)="onClickOtherOrigin()">
+            <label class="col form-check-label" for="searchFromInput">
+              Other. Please specify:
+            </label>
+
+            <div class="col">
+              <input type="text" class="col-sm-8 form-control" id="searchFromSpecify"
+              [required]="otherOriginInputReuired"
+              [(ngModel)]="searchInfo.from" name="from"
+              [disabled]="searchFromSpecifyDisabled"
+              #searchFromSpecify="ngModel"> <br>
+              <!-- <div class="invalid-feedback">Please enter a location</div> -->
+              <div class="row" *ngIf="searchFromSpecify.invalid && (searchFromSpecify.dirty || searchFromSpecify.touched)"
+              class="error-message">
+              <br>Please enter a location
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <button class="btn btn-primary" type="submit" value="Search" [disabled]="searchForm.invalid || searchInfo.fromLat === 0 || searchInfo.fromLon === 0"
+    (click)="onSubmit()">submit</button>
+    <button nowrap class="btn btn-primary" type="clear" value="Clear" (click)="clearSearchTable()" style="height:37px;width:auto;background-color: white;color:black;display:inline"><i class="material-icons">
+        clear_all
+        </i><span style="height:20px;font-size:15px">clear</span></button>
+
+
+</form>
+</div>
+

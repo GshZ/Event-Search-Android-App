@@ -1,0 +1,11 @@
+.error-message {
+  color: red;
+}
+.container {
+  border: 1px solid black;
+}
+#clear {
+  background-color: antiquewhite;
+  width: 40px;
+  height: 20px;
+}

@@ -1,0 +1,23 @@
+.progress-wrapper{
+  position: relative;
+}
+
+.progress-wrapper .current{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  text-align: center;
+  width: 40px;
+  z-index: 1;
+}
+
+.img-fluid {
+  margin: 5px;
+}
+h3 .name {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,22 @@
+#yellowStar {
+  color: #FAD631;
+}
+/* .btn btn-outline-secondary{
+  border: 2px solid black;
+}
+.btn btn-outline-secondary:active {
+  outline: none;
+  border: 2px solid black;
+} */
+.btn btn-light {
+  color: #E3E2E4;
+}
+/* table.table tr.active th:hover, .table tr.active td:hover{
+  /* color: blue; */
+  /* background: rgb(180, 178, 176);  */
+/* } */
+table.table tr.active th, .table tr.active td{
+  /* color: blue; */
+  background-color: rgb(245, 193, 126);
+}
+

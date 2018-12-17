@@ -1,0 +1,45 @@
+<div *ngIf="detailObj && detailObj['Artist/Team']">
+  <table class="table table-hover">
+    <tbody>
+      <tr *ngIf="detailObj['Artist/Team']">
+        <th scope="col">Artist/Team(s)</th>
+        <td scope="col">{{detailObj['Artist/Team']}}</td>
+      </tr>
+      <tr *ngIf="detailObj['Venue']">
+        <th scope="col">Venue</th>
+        <td scope="col">{{detailObj['Venue']}}</td>
+      </tr>
+      <tr *ngIf="detailObj['Time']">
+        <th scope="col">Time</th>
+        <td scope="col">{{detailObj['Date'] | date}} {{detailObj['Time']}}</td>
+      </tr>
+      <tr *ngIf="detailObj['Category']">
+        <th scope="col">Category</th>
+        <td scope="col">{{detailObj['Category']}}</td>
+      </tr>
+      <tr *ngIf="detailObj['Price Ranges']">
+        <th scope="col">Price Range</th>
+        <td scope="col">{{detailObj['Price Ranges']['min'] | currency}} ~ {{detailObj['Price Ranges']['max'] | currency}}</td>
+      </tr>
+      <tr *ngIf="detailObj['Ticket Status']">
+        <th scope="col">Ticket Status</th>
+        <td scope="col">{{detailObj['Ticket Status']}}</td>
+      </tr>
+      <tr *ngIf="detailObj['Buy Ticket At']">
+        <th scope="col">Buy Ticket At</th>
+        <td scope="col"><a target='_blank' [attr.href]="detailObj['Buy Ticket At']">Ticketmaster</a></td>
+      </tr>
+      <tr *ngIf="detailObj['Seat Map']">
+        <th scope="col">Seat Map</th>
+        <td scope="col">
+          <a href="javascript:void(0);" (click)="openDialog()">
+            View Seat Map Here
+          </a>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="detailObj['error']" style="background:#FACC7D;">Failed to get event detail resuls.</div>

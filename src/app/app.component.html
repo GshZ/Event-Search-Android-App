@@ -1,0 +1,20 @@
+<app-search-table (submitSearch)="getTMEventJSONObj($event)" (showBar)="showProgressBar($event)"></app-search-table>
+<div class="container">
+<mat-tab-group class="nav nav-pills justify-content-center"  mat-align-tabs="center" dynamicHeight = "true" [(selectedIndex)]="selectedIndex">
+  <mat-tab color="primary" class="nav-item" label="Results" (click)="backToEventResult()"
+  style="background-color: blue">
+    <div class="container" [hidden]="noButton"><app-events-detail-nav *ngIf="showRDNAV" [passEventsInfo]="TMEventJSONObj" [eventsTableHidden]="showEventResult" [detailTableHidden]="hideDetail"></app-events-detail-nav></div>
+  </mat-tab>
+  <mat-tab class="nav-item" label="Favorites">
+    <div class="container"> <app-favorites-detail-nav></app-favorites-detail-nav></div>
+  </mat-tab>
+</mat-tab-group>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+
+<app-progress [hidden]="!showBar"></app-progress>
+</div>

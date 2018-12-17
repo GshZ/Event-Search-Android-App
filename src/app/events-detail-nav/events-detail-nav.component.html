@@ -1,0 +1,41 @@
+<div  *ngIf="passEventsInfo[0]!=undefined">
+<div [hidden]="!detailTableHidden || passEventsInfo=={}" [@slideInOutEvent]="detailTableHidden ? open : hidden">
+  <br><br>
+  <button [hidden]="!detailTableHidden || passEventsInfo[0] == undefined || passEventsInfo[0] =='No result'" type="button" class="btn btn-outline-secondary float-right" (click)="goToDetail()" [disabled]="disableDetailButton" name="detailButton">Details ></button>
+  <app-events-table (submitDetail)="getTMDetailJSONObj($event)" [obj]="passEventsInfo"></app-events-table>
+</div>
+
+<div *ngIf="!detailTableHidden" [@slideInOutDetail]>
+    <h3 class="eventName">{{eventName}}</h3><br>
+  <button type="button" class="btn btn-outline-secondary" (click)="goToLists()">< List</button>
+  <button class="btn btn-outline-light float-right">
+    <!-- <a href="#" (click)="callTwiterApi()"> -->
+    <a class="twitter-share-button" target="_blank"
+        [href]="tweetHerf"
+        data-size="large">
+        <img src="http://csci571.com/hw/hw8/Images/Twitter.png" style="width:20px; height:20px">
+    </a>
+    <!-- </a> -->
+  </button>
+  <button type="button" class="btn btn-outline-secondary float-right" *ngIf="!check()" (click)="favorite()">
+    <i class="material-icons black" >
+      star_border
+    </i>
+  </button>
+  <button type="button" class="btn btn-outline-secondary float-right" *ngIf="check()" (click)="favoriteDelete()">
+    <i class="material-icons" id = "yellowStar" >
+      star
+    </i>
+  </button>
+  <mat-tab-group class="nav nav-pills justify-content-center" mat-align-tabs="center" dynamicHeight = "true">
+      <mat-tab class="nav-item" label="Event">
+        <div class="container"><app-event-detail [detailObj]="TMDetailJSONObj"></app-event-detail></div>
+      </mat-tab>
+      <mat-tab class="nav-item" label="Artist/Team">
+        <app-artist-or-team [detailObj]="TMDetailJSONObj"></app-artist-or-team></mat-tab>
+      <mat-tab class="nav-item" label="Venue"><app-venue-table [detailObj]="TMDetailJSONObj"></app-venue-table> </mat-tab>
+      <mat-tab class="nav-item" label="UpcomingEvent"><app-upcoming-event [detailObj]="TMDetailJSONObj"></app-upcoming-event> </mat-tab>
+    </mat-tab-group>
+
+</div>
+</div>

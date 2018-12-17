@@ -1,0 +1,59 @@
+<div *ngIf="res != [] && res.length > 0" >
+  <div *ngFor="let obj of res">
+    <div class="row justify-content-center align-items center">
+      <h3 class="name">{{obj['images']['name']}}</h3>
+    </div>
+  <!-- <div *ngFor="let member of members"> -->
+    <div *ngIf="obj['artists'] !== []" class="container">
+      <table class="table table-striped">
+        <tbody>
+          <tr *ngIf="obj['artists']['name']">
+            <th scope="row">name</th>
+            <td>{{obj['artists']['name']}}</td>
+          </tr>
+          <tr *ngIf="obj['artists']['followers']">
+            <th scope="row">Followers</th>
+            <td>{{obj['artists']['followers'] | number:'4.5-5'}}</td>
+          </tr>
+          <tr *ngIf="obj['artists']['popularity']">
+            <th scope="row">Popularity</th>
+            <td>
+              <div class="progress-wrapper">
+                <div class="current">     {{obj['artists']['popularity']}}</div>
+                <round-progress [current]="obj['artists']['popularity']" [max]="100" [radius]="20" [stroke]="5" [clockwise]="false"></round-progress>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="obj['artists']['check_at']">
+            <th scope="row">Check At</th>
+            <td><a target='_blank' [attr.href]="obj['artists']['check_at']">Spotify</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container justify-content-center align-items center" style="width:1000px">
+      <div class="row">
+        <div class="col" style="width:180px">
+          <a target='_blank' [attr.href]="obj['images']['url0']"><img class="img-fluid" [src]="obj['images']['url0']"></a>
+          <a target='_blank' [attr.href]="obj['images']['url3']"><img class="img-fluid" [src]="obj['images']['url3']"></a>
+        </div>
+        <div class="col" style="width:180px">
+            <a target='_blank' [attr.href]="obj['images']['url1']"><img class="img-fluid" [src]="obj['images']['url1']"></a>
+            <a target='_blank' [attr.href]="obj['images']['url4']"><img class="img-fluid" [src]="obj['images']['url4']"></a>
+            <a target='_blank' [attr.href]="obj['images']['url6']"><img class="img-fluid" [src]="obj['images']['url6']"></a>
+          </div>
+        <div class="col" style="width:180px">
+            <a target='_blank' [attr.href]="obj['images']['url6']"><img class="img-fluid width: auto" [src]="obj['images']['url6']"></a>
+            <a target='_blank' [attr.href]="obj['images']['url5']"><img class="img-fluid" [src]="obj['images']['url5']"></a>
+            <a target='_blank' [attr.href]="obj['images']['url7']"><img class="img-fluid" [src]="obj['images']['url7']"></a>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<br><br>
+<div *ngIf="res.length == 0" style="background:#FACC7D;">No records</div>
+<div *ngIf="detailObj['error']" style="background:#FACC7D;">Failed to get event detail resuls.</div>
+

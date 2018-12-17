@@ -1,0 +1,53 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<div *ngIf="obj && obj[0] && this.obj[0] != 'error'">
+<div *ngIf="this.obj[0] != 'No result'">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Event</th>
+        <th scope="col">Category</th>
+        <th scope="col">Venue Info</th>
+        <th scope="col">Favorite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of obj; let i = index" [ngClass]="{active: isActive && activeIndex.indexOf(i) !== -1}">
+        <th scope="row">{{i + 1}}</th>
+        <td *ngIf="event['dates']['start']['localDate'] != undefined; else elseTemplate">{{event['dates']['start']['localDate']}}</td>
+        <ng-template #elseTemplate>N/A</ng-template>
+        <td *ngIf="event['name'] != undefined; else elseTemplate">
+          <!-- <span class="d-inline-block" tabindex="0" data-toggle="tooltip" [title]="event['name']"> -->
+              <a href = 'javascript:void(0);' data-toggle="tooltip" [title]="event['name']" (click) = "sendEventDetailRequest(event['id'], event['name'], i, shortenName(i))">
+                {{shortenName(i)}}
+              </a>
+          <!-- </span> -->
+
+        </td>
+        <ng-template #elseTemplate>N/A</ng-template>
+        <td *ngIf="event['classifications'][0]['genre']['name'] != undefined; else elseTemplate">{{event['classifications'][0]['genre']['name']}}-{{event['classifications'][0]['segment']['name']}}</td>
+        <ng-template #elseTemplate>{{event['classifications'][0]['segment']['name']}}</ng-template>
+        <td *ngIf="event['_embedded']['venues'][0]['name'] != undefined; else elseTemplate">{{event['_embedded']['venues'][0]['name']}}</td>
+        <ng-template #elseTemplate>N/A</ng-template>
+        <td>
+          <button type="button" class="btn btn-outline-secondary border" (click)="favorite(event, shortenName(i), i)" *ngIf="!check(event['id'])">
+            <i class="material-icons black">
+              star_border
+            </i>
+          </button>
+          <button type="button" class="btn btn-outline-secondary border" (click)="favoriteDelete(event, i)" *ngIf="check(event['id'])">
+            <i class="material-icons" id = "yellowStar">
+              star
+            </i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="this.obj[0] === 'No result'" style="background:#FACC7D;">No records</div>
+<div *ngIf="this.obj['error']" style="background:#FACC7D;">Failed to get search result</div>
+
+</div>

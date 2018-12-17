@@ -1,0 +1,39 @@
+<div *ngIf="venueData && venueData['address']" >
+  <div class="row justify-content-center align-items center">
+    <p class="name">{{detailObj['Venue']}}</p>
+  </div>
+  <table class="table table-striped">
+    <tr *ngIf="venueData['address']">
+      <th nowrap>Address</th>
+      <td>{{venueData['address']['line1']}}</td>
+    </tr>
+    <tr *ngIf="venueData['city'] || venueData['state']">
+      <th>City</th>
+      <td *ngIf="venueData['city'] && venueData['state']">{{venueData['city']}}, {{venueData['state']}}</td>
+      <td *ngIf="venueData['city'] && !venueData['state']">{{venueData['city']}}</td>
+      <td *ngIf="!venueData['city'] && venueData['state']">{{venueData['state']}}</td>
+    </tr>
+    <tr *ngIf="venueData['phoneNUmber']">
+      <th nowrap>Phone Number</th>
+      <td>{{venueData['phoneNUmber']}}</td>
+    </tr>
+    <tr *ngIf="venueData['openHour']">
+      <th nowrap>Open Hours</th>
+      <td>{{venueData['openHour']}}</td>
+    </tr>
+    <tr *ngIf="venueData['generalRule']">
+      <th nowrap>General Rule</th>
+      <td>{{venueData['generalRule']}}</td>
+    </tr>
+    <tr *ngIf="venueData['childRule']">
+      <th nowrap>Child Rule</th>
+      <td>{{venueData['childRule']}}</td>
+    </tr>
+  </table>
+  <div>
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom] = '14'>
+      <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker>
+    </agm-map>
+  </div>
+</div>
+<div *ngIf="detailObj['error']" style="background:#FACC7D;">Failed to get event detail resuls.</div>

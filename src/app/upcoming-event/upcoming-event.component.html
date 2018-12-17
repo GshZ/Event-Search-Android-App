@@ -1,0 +1,36 @@
+<div *ngIf="!noresult">
+  <div class="dropdown">
+
+    <select name="sortCategory" id="sortCategory"
+    [(ngModel)]="sortCate" (change)="clickSortCate($event)">
+      <option default selected value="">Default</option>
+      <option value="eventName">Event Name</option>
+      <option value="time">Time</option>
+      <option value="artist">Artist</option>
+      <option value="type">Type</option>
+    </select>
+    <select name="order" id="sortOrder"
+    [(ngModel)]="sortOrder" [disabled]="sortdisabled" (change)="clickSortCate($event)">
+      <option default selected value="asc">Ascending</option>
+      <option value="des">Descending</option>
+    </select>
+  </div>
+  <div>
+    <table class="table table-hover">
+      <tr *ngFor="let event of resultData" [@fade]>
+        <td>
+          <p><a target='_blank' [attr.href]="event['uri']">{{event['displayName']}}</a><br></p>
+          <p class="artists"><span style="color:#FACC7D"> {{event['artist']}} </span>   {{event['date'] | date}} {{event['time']}}<br></p>
+          <p>Type: {{event['type']}}</p>
+        </td>
+      </tr>
+    </table>
+    <div class="row justify-content-center align-items-center">
+      <button type="button" class="btn btn-primary justify-content-center align-items center" (click)="showMore()" [hidden]="showMoreHidden">Show More</button>
+      <button type="button" class="btn btn-primary justify-content-center align-items center" (click)="showLess()" [hidden]="!showMoreHidden">Show Less</button>
+    </div>
+  </div>
+</div>
+<br><br>
+<div *ngIf="noresult" style="background:#FACC7D;">No records</div>
+<div *ngIf="detailObj['error']" style="background:#FACC7D;">Failed to get event detail resuls.</div>
